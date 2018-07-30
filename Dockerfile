@@ -2,7 +2,7 @@ FROM openjdk:8u151-jdk
 MAINTAINER Christian Hoffmeister <mail@choffmeister.de>
 
 ENV SCALA_VERSION="2.12.5"
-ENV SBT_VERSION="1.1.2"
+ENV SBT_VERSION="1.1.6"
 ENV DOCKER_VERSION="17.12.1-ce"
 
 WORKDIR /tmp
@@ -18,24 +18,15 @@ RUN \
   ln -s /opt/scala/bin/scalap /usr/bin/scalap && \
   rm scala-$SCALA_VERSION.tgz
 RUN \
-  wget -q https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz && \
-  echo "ddc9aea7f1465b5873f8ec06ae69a29db516ffe2  sbt-$SBT_VERSION.tgz" | shasum -c - && \
+  wget -q https://piccolo.link/sbt-$SBT_VERSION.tgz && \
+  echo "c2b4a113057bc2c4f6224ec8b26987f64b91c1f1  sbt-$SBT_VERSION.tgz" | shasum -c - && \
   tar xf sbt-$SBT_VERSION.tgz && \
   mv sbt /opt/sbt && \
   ln -s /opt/sbt/bin/sbt /usr/bin/sbt && \
   rm sbt-$SBT_VERSION.tgz && \
   mkdir project && \
-  echo "sbt.version=1.1.2" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.1.1" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.1.0" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.0.4" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.0.3" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.0.2" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.0.1" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=1.0.0" > project/build.properties && sbt sbtVersion && \
+  echo "sbt.version=1.1.6" > project/build.properties && sbt sbtVersion && \
   echo "sbt.version=0.13.17" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=0.13.16" > project/build.properties && sbt sbtVersion && \
-  echo "sbt.version=0.13.15" > project/build.properties && sbt sbtVersion && \
   rm -rf project
 RUN \
   wget -q https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz && \
