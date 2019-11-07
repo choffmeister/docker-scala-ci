@@ -1,5 +1,5 @@
 # scala-ci
 
-* Scala v2.12.5
-* SBT v1.1.6
+* Scala v2.13.1
+* SBT v1.3.3
 * Docker client binaries v17.12.1-ce
